@@ -2,7 +2,7 @@
 
 import { ComponentProps } from "react";
 import Link from "next/link";
-import { Command, Clock, AlarmClock } from "lucide-react";
+import { Clock, AlarmClock } from "lucide-react";
 import { NavFunctions } from "@/components/global/nav-functions";
 import {
   Sidebar,

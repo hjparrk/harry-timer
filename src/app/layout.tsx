@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
-import { Ubuntu_Sans, Ubuntu_Sans_Mono, Michroma } from "next/font/google";
+import {
+  Ubuntu_Sans,
+  Ubuntu_Sans_Mono,
+  Share_Tech_Mono,
+  Kode_Mono,
+} from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/global/theme-provider";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
@@ -16,15 +21,15 @@ const ubuntuMono = Ubuntu_Sans_Mono({
   subsets: ["latin"],
 });
 
-const michroma = Michroma({
-  variable: "--font-michroma",
+const shareTechMono = Kode_Mono({
+  variable: "--font-kode-mono",
   subsets: ["latin"],
-  weight: "400",
+  weight: "500",
 });
 
 export const metadata: Metadata = {
-  title: "Pomodoro Timer",
-  description: "Pomodoro Timer",
+  title: "Harry's Timer",
+  description: "Harry's Timer",
 };
 
 export default async function RootLayout({
@@ -35,7 +40,7 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${ubuntuSans.variable} ${ubuntuMono.variable} ${michroma.variable} font-sans antialiased`}
+        className={`${ubuntuSans.variable} ${ubuntuMono.variable} ${shareTechMono.variable} font-sans antialiased`}
       >
         <ThemeProvider
           attribute="class"
