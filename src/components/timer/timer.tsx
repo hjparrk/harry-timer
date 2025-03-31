@@ -18,7 +18,7 @@ import { soundFiles } from "@/data/sound-files";
 export default function Timer() {
   const [stopAtZero, setStopAtZero] = useLocalStorage(TIMER_MODE_KEY, false);
   const { timerOptions } = useTimerStore();
-  const { initialTime, initialSoundKey } = timerOptions;
+  const { initialTime, initialSoundKey, initialVolume } = timerOptions;
   const { time, isActive, isCompleted, startTimer, stopTimer, resetTimer } =
     useTimer({
       initialTime,
@@ -28,7 +28,7 @@ export default function Timer() {
   useEffect(() => {
     if (isCompleted) {
       const audio = new Audio(soundFiles[initialSoundKey].path);
-      audio.volume = 0.5;
+      audio.volume = initialVolume;
       audio.play();
     }
   }, [isCompleted, initialSoundKey]);

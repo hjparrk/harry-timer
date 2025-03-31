@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/global/theme-provider";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/global/app-sidebar";
 import Header from "@/components/global/header";
+import { Toaster } from "@/components/ui/sonner";
 import NotificationRequest from "@/components/global/notification-request";
 
 const ubuntuSans = Ubuntu_Sans({
@@ -52,6 +53,7 @@ export default async function RootLayout({
               {children}
             </SidebarInset>
           </SidebarProvider>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

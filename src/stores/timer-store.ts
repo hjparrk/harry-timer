@@ -5,11 +5,13 @@ const STORAGE_KEY = "timer-storage";
 const INIT_TIMER_OPTIONS = {
   initialTime: 300,
   initialSoundKey: "mute",
+  initialVolume: 0.5,
 };
 
 interface TimerOptions {
   initialTime: number; // seconds
   initialSoundKey: string;
+  initialVolume: number;
 }
 
 type TimerOptionsStore = {
