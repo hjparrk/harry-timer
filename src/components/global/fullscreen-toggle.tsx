@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Fullscreen } from "lucide-react";
+import { Maximize } from "lucide-react";
 import { useEffect } from "react";
 
 export default function FullScreenToggle() {
@@ -34,7 +34,7 @@ export default function FullScreenToggle() {
       onClick={toggleFullscreen}
       className="size-7"
     >
-      <Fullscreen />
+      <Maximize />
     </Button>
   );
 }

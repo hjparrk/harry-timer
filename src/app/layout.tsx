@@ -1,15 +1,11 @@
 import type { Metadata } from "next";
-import {
-  Ubuntu_Sans,
-  Ubuntu_Sans_Mono,
-  Share_Tech_Mono,
-  Kode_Mono,
-} from "next/font/google";
+import { Ubuntu_Sans, Ubuntu_Sans_Mono, Kode_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/global/theme-provider";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/global/app-sidebar";
 import Header from "@/components/global/header";
+import NotificationRequest from "@/components/global/notification-request";
 
 const ubuntuSans = Ubuntu_Sans({
   variable: "--font-ubuntu-sans",
@@ -42,6 +38,7 @@ export default async function RootLayout({
       <body
         className={`${ubuntuSans.variable} ${ubuntuMono.variable} ${shareTechMono.variable} font-sans antialiased`}
       >
+        <NotificationRequest />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
