@@ -40,7 +40,8 @@ export function TimerEditForm({ isActive }: { isActive: boolean }) {
           <DialogHeader>
             <DialogTitle>Edit Timer</DialogTitle>
             <DialogDescription>
-              Make changes to your profile here. Click save when you're done.
+              Make changes to your profile here. Click save when you&apos;re
+              done.
             </DialogDescription>
           </DialogHeader>
 
@@ -63,7 +64,7 @@ export function TimerEditForm({ isActive }: { isActive: boolean }) {
           <DrawerHeader className="text-left">
             <DrawerTitle>Edit Timer</DrawerTitle>
             <DrawerDescription>
-              Make changes to your timer. Click save when you're done.
+              Make changes to your timer. Click save when you&apos;re done.
             </DrawerDescription>
           </DrawerHeader>
 
