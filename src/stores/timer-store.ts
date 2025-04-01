@@ -6,12 +6,14 @@ const INIT_TIMER_OPTIONS = {
   initialTime: 300,
   initialSoundKey: "mute",
   initialVolume: 0.5,
+  initialColor: "",
 };
 
 interface TimerOptions {
   initialTime: number; // seconds
   initialSoundKey: string;
   initialVolume: number;
+  initialColor: string;
 }
 
 type TimerOptionsStore = {

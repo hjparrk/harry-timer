@@ -12,6 +12,7 @@ import { NotificationSoundSelector } from "./notification-sound-selector";
 import { secondsToHHMMDD, timeToSeconds } from "@/utils/time-utils";
 import { useTimerStore } from "@/stores/timer-store";
 import { toast } from "sonner";
+import { GradientPicker } from "../common/gradient-picker";
 
 interface TimerFormProps extends ComponentProps<"form"> {
   closeTimerForm: () => void;
@@ -19,7 +20,8 @@ interface TimerFormProps extends ComponentProps<"form"> {
 
 export function TimerForm({ className, closeTimerForm }: TimerFormProps) {
   const { timerOptions, setTimerOptions } = useTimerStore();
-  const { initialTime, initialSoundKey, initialVolume } = timerOptions;
+  const { initialTime, initialSoundKey, initialVolume, initialColor } =
+    timerOptions;
   const {
     hours: initialHours,
     minutes: initialMinutes,
@@ -31,6 +33,7 @@ export function TimerForm({ className, closeTimerForm }: TimerFormProps) {
   const [seconds, setSeconds] = useState(initialSeconds);
   const [soundKey, setSoundKey] = useState(initialSoundKey);
   const [volume, setVolume] = useState(initialVolume);
+  const [color, setColor] = useState(initialColor);
 
   const handleVolumeChange = (newVolume: string) => {
     setVolume(parseFloat(newVolume));
@@ -64,6 +67,7 @@ export function TimerForm({ className, closeTimerForm }: TimerFormProps) {
       initialTime: timeToSeconds(hours, minutes, seconds),
       initialSoundKey: soundKey,
       initialVolume: volume,
+      initialColor: color,
     });
     closeTimerForm();
   };
@@ -180,6 +184,8 @@ export function TimerForm({ className, closeTimerForm }: TimerFormProps) {
           <Label htmlFor="1">1</Label>
         </div>
       </RadioGroup>
+
+      <GradientPicker background={color} setBackground={setColor} />
 
       <Button onClick={handleFormSubmit}>Save changes</Button>
     </div>

@@ -35,13 +35,13 @@ export function AppSidebar({ ...props }: ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <Link href="/">
-                <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
+                <div className="bg-sidebar flex aspect-square size-8 items-center justify-center rounded-lg">
                   <Image
                     src="/icon.svg"
                     alt="icon"
                     height={0}
                     width={0}
-                    className="bg-sidebar-primary-foreground outline-primary h-full w-full rounded outline"
+                    className="h-full w-full"
                   />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">

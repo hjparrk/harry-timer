@@ -14,11 +14,13 @@ import { Button } from "@/components/ui/button";
 import { useLocalStorage } from "@/hooks/use-localstorage";
 import { TIMER_MODE_KEY } from "@/data/storage-keys";
 import { soundFiles } from "@/data/sound-files";
+import { cn } from "@/lib/utils";
 
 export default function Timer() {
   const [stopAtZero, setStopAtZero] = useLocalStorage(TIMER_MODE_KEY, false);
   const { timerOptions } = useTimerStore();
-  const { initialTime, initialSoundKey, initialVolume } = timerOptions;
+  const { initialTime, initialSoundKey, initialVolume, initialColor } =
+    timerOptions;
   const { time, isActive, isCompleted, startTimer, stopTimer, resetTimer } =
     useTimer({
       initialTime,
@@ -32,6 +34,10 @@ export default function Timer() {
       audio.play();
     }
   }, [isCompleted, initialSoundKey]);
+
+  useEffect(() => {
+    document.title = `⏳ ${secondsToTime(formatTimerTime(time))} - Harry's Timer`;
+  }, [time]);
 
   return (
     <div className="relative flex h-full flex-col items-center justify-center">
@@ -51,7 +57,16 @@ export default function Timer() {
 
       <div className="space-y-5">
         <div className="font-digital relative text-5xl">
-          <h1>{secondsToTime(formatTimerTime(time))}</h1>
+          <div
+            className={cn(
+              "inline-block !bg-clip-text !bg-center text-9xl transition-all",
+              initialColor !== "" && "text-transparent",
+            )}
+            style={{ background: initialColor }}
+          >
+            {secondsToTime(formatTimerTime(time))}
+          </div>
+
           {isCompleted && (
             <div className="absolute -top-3 -right-3">
               <Ping />

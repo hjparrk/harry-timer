@@ -20,7 +20,7 @@ import {
   DrawerTrigger,
 } from "../ui/drawer";
 import { TimerForm } from "./timer-form";
-import { HydrationWrapper } from "../common/HydrationWrapper";
+import { HydrationWrapper } from "../common/hydration-wrapper";
 
 export function TimerEditForm({ isActive }: { isActive: boolean }) {
   const [open, setOpen] = React.useState(false);
