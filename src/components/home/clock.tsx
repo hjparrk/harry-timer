@@ -20,8 +20,8 @@ export default function Clock() {
         <Label htmlFor="clock-mode">24-hour Mode</Label>
       </div>
 
-      <div className="font-digital w-10/12 text-center">
-        <div className="text-4xl sm:text-7xl md:text-8xl lg:text-9xl">
+      <div className="w-10/12 text-center font-sans font-semibold tracking-tight">
+        <div className="text-5xl sm:text-7xl md:text-[7rem] lg:text-[9rem]">
           {time}
         </div>
         <div className="text-lg sm:text-3xl md:text-4xl lg:text-5xl">

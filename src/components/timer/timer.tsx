@@ -36,13 +36,13 @@ export default function Timer() {
   }, [isCompleted, initialSoundKey]);
 
   useEffect(() => {
-    document.title = `⏳ ${secondsToTime(formatTimerTime(time))} - Harry's Timer`;
+    document.title = `${secondsToTime(formatTimerTime(time))} - Harry's Timer`;
   }, [time]);
 
   return (
-    <div className="relative flex h-full flex-col items-center justify-center">
+    <div className="relative flex h-full flex-col items-center justify-center rounded-md">
       <Progress
-        className="absolute top-0 h-0.5"
+        className="absolute top-0 h-1"
         value={((initialTime - time) / initialTime) * 100}
       />
       <div className="absolute top-5 left-5 flex items-center space-x-2">
@@ -55,11 +55,11 @@ export default function Timer() {
         <Label htmlFor="timer-mode">Stop Timer at Zero</Label>
       </div>
 
-      <div className="space-y-5">
-        <div className="font-digital relative text-5xl">
+      <div className="relative space-y-14">
+        <div className="relative text-5xl">
           <div
             className={cn(
-              "inline-block !bg-clip-text !bg-center text-9xl transition-all",
+              "inline-block !bg-clip-text !bg-center font-sans text-5xl font-semibold tracking-tight transition-all sm:text-7xl md:text-[7rem] lg:text-[9rem]",
               initialColor !== "" && "text-transparent",
             )}
             style={{ background: initialColor }}
@@ -74,22 +74,22 @@ export default function Timer() {
           )}
         </div>
 
-        <div className="flex justify-center space-x-2">
+        <div className="flex justify-center space-x-2 px-12">
           {!isActive ? (
-            <Button onClick={startTimer} className="flex-1">
+            <Button onClick={startTimer} className="flex-1 rounded-full">
               <Play />
             </Button>
           ) : (
-            <Button onClick={stopTimer} className="flex-1">
+            <Button onClick={stopTimer} className="flex-1 rounded-full">
               <Pause />
             </Button>
           )}
-          <Button onClick={resetTimer} className="flex-1">
+          <Button onClick={resetTimer} className="flex-1 rounded-full">
             <RotateCcw />
           </Button>
-        </div>
 
-        <TimerEditForm isActive={isActive} />
+          <TimerEditForm isActive={isActive} />
+        </div>
       </div>
     </div>
   );

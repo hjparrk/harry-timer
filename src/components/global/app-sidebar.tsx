@@ -2,7 +2,7 @@
 
 import { ComponentProps } from "react";
 import Link from "next/link";
-import { Clock, AlarmClock } from "lucide-react";
+import { Clock, AlarmClock, WatchIcon } from "lucide-react";
 import { NavFunctions } from "@/components/global/nav-functions";
 import {
   Sidebar,
@@ -16,14 +16,19 @@ import Image from "next/image";
 
 const functions = [
   {
-    name: "timer",
-    url: "/timer",
+    name: "Clock",
+    url: "/",
     icon: Clock,
   },
   {
-    name: "pomodoro timer",
-    url: "/pomodoro-timer",
+    name: "timer",
+    url: "/timer",
     icon: AlarmClock,
+  },
+  {
+    name: "stop watch",
+    url: "/stopwatch",
+    icon: WatchIcon,
   },
 ];
 

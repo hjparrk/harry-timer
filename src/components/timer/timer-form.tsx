@@ -75,7 +75,7 @@ export function TimerForm({ className, closeTimerForm }: TimerFormProps) {
   return (
     <div className={cn("grid items-start gap-4", className)}>
       <div className="grid gap-2">
-        <Label>Hours (max. 12 hrs)</Label>
+        <Label className="font-bold">Hours (max. 12 hrs)</Label>
         <div className="flex gap-2">
           <Slider
             value={[hours]}
@@ -100,7 +100,7 @@ export function TimerForm({ className, closeTimerForm }: TimerFormProps) {
       </div>
 
       <div className="grid gap-2">
-        <Label>Minutes</Label>
+        <Label className="font-bold">Minutes</Label>
         <div className="flex gap-2">
           <Slider
             value={[minutes]}
@@ -125,7 +125,7 @@ export function TimerForm({ className, closeTimerForm }: TimerFormProps) {
       </div>
 
       <div className="grid gap-2">
-        <Label>Seconds</Label>
+        <Label className="font-bold">Seconds</Label>
         <div className="flex gap-2">
           <Slider
             value={[seconds]}
@@ -150,14 +150,14 @@ export function TimerForm({ className, closeTimerForm }: TimerFormProps) {
       </div>
 
       <div className="grid gap-2">
-        <Label>Notification Sound</Label>
+        <Label className="font-bold">Notification Sound</Label>
         <NotificationSoundSelector
           soundKey={soundKey}
           setSoundKey={setSoundKey}
         />
       </div>
 
-      <Label>Sound Volume</Label>
+      <Label className="font-bold">Sound Volume</Label>
       <RadioGroup
         value={volume.toString()}
         onValueChange={handleVolumeChange}
@@ -185,6 +185,7 @@ export function TimerForm({ className, closeTimerForm }: TimerFormProps) {
         </div>
       </RadioGroup>
 
+      <Label className="font-bold">Theme</Label>
       <GradientPicker background={color} setBackground={setColor} />
 
       <Button onClick={handleFormSubmit}>Save changes</Button>

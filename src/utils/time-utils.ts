@@ -23,6 +23,10 @@ export const secondsToTime = (totalSeconds: number) => {
   date.setMinutes(minutes);
   date.setSeconds(seconds);
 
+  if (hours == 0) {
+    return format(date, "mm:ss");
+  }
+
   return format(date, "HH:mm:ss");
 };
 

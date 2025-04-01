@@ -21,6 +21,7 @@ import {
 } from "../ui/drawer";
 import { TimerForm } from "./timer-form";
 import { HydrationWrapper } from "../common/hydration-wrapper";
+import { Settings } from "lucide-react";
 
 export function TimerEditForm({ isActive }: { isActive: boolean }) {
   const [open, setOpen] = React.useState(false);
@@ -33,15 +34,16 @@ export function TimerEditForm({ isActive }: { isActive: boolean }) {
   if (isDesktop) {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild className="w-full uppercase">
-          <Button disabled={isActive}>Edit Timer</Button>
+        <DialogTrigger asChild>
+          <Button disabled={isActive} className="rounded-full">
+            <Settings />
+          </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-xl">
           <DialogHeader>
             <DialogTitle>Edit Timer</DialogTitle>
             <DialogDescription>
-              Make changes to your profile here. Click save when you&apos;re
-              done.
+              Make changes to your timer here. Click save when you&apos;re done.
             </DialogDescription>
           </DialogHeader>
 
@@ -56,8 +58,10 @@ export function TimerEditForm({ isActive }: { isActive: boolean }) {
 
   return (
     <Drawer open={open} onOpenChange={setOpen}>
-      <DrawerTrigger asChild className="w-full uppercase">
-        <Button disabled={isActive}>Edit Timer</Button>
+      <DrawerTrigger asChild>
+        <Button className="rounded-full" disabled={isActive}>
+          <Settings />
+        </Button>
       </DrawerTrigger>
       <DrawerContent>
         <div className="h-7/12 overflow-auto">
