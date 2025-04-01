@@ -14,7 +14,7 @@ export function useClock() {
   useEffect(() => {
     const updateTime = () => {
       const newDate = new Date();
-      newDate.setHours(newDate.getHours() + 8);
+      newDate.setHours(newDate.getHours());
       setTime(formatTime(newDate, is24Hour));
       setDate(formatDate(newDate));
     };
