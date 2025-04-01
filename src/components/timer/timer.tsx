@@ -56,10 +56,10 @@ export default function Timer() {
       </div>
 
       <div className="relative space-y-14">
-        <div className="relative text-5xl">
+        <div className="relative">
           <div
             className={cn(
-              "inline-block !bg-clip-text !bg-center font-sans text-5xl font-semibold tracking-tight transition-all sm:text-7xl md:text-[7rem] lg:text-[9rem]",
+              "inline-block min-w-32 !bg-clip-text !bg-center text-center font-sans text-5xl font-semibold tracking-tight transition-all sm:text-7xl md:text-[7rem] lg:text-[9rem]",
               initialColor !== "" && "text-transparent",
             )}
             style={{ background: initialColor }}
@@ -74,7 +74,7 @@ export default function Timer() {
           )}
         </div>
 
-        <div className="flex justify-center space-x-2 px-12">
+        <div className="flex justify-center space-x-2">
           {!isActive ? (
             <Button onClick={startTimer} className="flex-1 rounded-full">
               <Play />
