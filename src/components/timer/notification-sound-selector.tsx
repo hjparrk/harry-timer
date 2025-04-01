@@ -18,6 +18,7 @@ export function NotificationSoundSelector({
     const sound = soundFiles[soundKey]?.path;
     if (sound) {
       const audio = new Audio(sound);
+      audio.preload = "auto";
       audio.play();
     }
   };

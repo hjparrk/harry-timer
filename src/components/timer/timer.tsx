@@ -31,6 +31,7 @@ export default function Timer() {
     if (isCompleted) {
       const audio = new Audio(soundFiles[initialSoundKey].path);
       audio.volume = initialVolume;
+      audio.preload = "auto";
       audio.play();
     }
   }, [isCompleted, initialSoundKey]);
