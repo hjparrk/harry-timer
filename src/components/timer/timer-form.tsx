@@ -1,4 +1,4 @@
-import { ComponentProps, useState } from "react";
+import { ComponentProps, Fragment, useState } from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -8,17 +8,23 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
-import { NotificationSoundSelector } from "./notification-sound-selector";
 import { secondsToHHMMDD, timeToSeconds } from "@/utils/time-utils";
 import { useTimerStore } from "@/stores/timer-store";
 import { toast } from "sonner";
 import { GradientPicker } from "../common/gradient-picker";
+import { soundFiles } from "@/data/sound-files";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 
-interface TimerFormProps extends ComponentProps<"form"> {
-  closeTimerForm: () => void;
-}
-
-export function TimerForm({ className, closeTimerForm }: TimerFormProps) {
+export function TimerForm({
+  className,
+  closeTimerForm,
+}: ComponentProps<"form"> & { closeTimerForm: () => void }) {
   const { timerOptions, setTimerOptions } = useTimerStore();
   const { initialTime, initialSoundKey, initialVolume, initialColor } =
     timerOptions;
@@ -35,8 +41,8 @@ export function TimerForm({ className, closeTimerForm }: TimerFormProps) {
   const [volume, setVolume] = useState(initialVolume);
   const [color, setColor] = useState(initialColor);
 
-  const handleVolumeChange = (newVolume: string) => {
-    setVolume(parseFloat(newVolume));
+  const onVolumeChange = (volume: string) => {
+    setVolume(parseFloat(volume));
   };
 
   const handleFormSubmit = () => {
@@ -74,6 +80,29 @@ export function TimerForm({ className, closeTimerForm }: TimerFormProps) {
 
   return (
     <div className={cn("grid items-start gap-4", className)}>
+      <HoursSlider hours={hours} setHours={setHours} />
+      <MinutesSlider minutes={minutes} setMinutes={setMinutes} />
+      <SecondsSlider seconds={seconds} setSeconds={setSeconds} />
+      <NotificationSoundSelector
+        soundKey={soundKey}
+        setSoundKey={setSoundKey}
+      />
+      <SoundVolumeRadioGroup volume={volume} onValueChange={onVolumeChange} />
+      <ThemePicker color={color} setColor={setColor} />
+      <Button onClick={handleFormSubmit}>Save changes</Button>
+    </div>
+  );
+}
+
+function HoursSlider({
+  hours,
+  setHours,
+}: {
+  hours: number;
+  setHours: (hours: number) => void;
+}) {
+  return (
+    <Fragment>
       <div className="grid gap-2">
         <Label className="font-bold">Hours (max. 12 hrs)</Label>
         <div className="flex gap-2">
@@ -98,7 +127,19 @@ export function TimerForm({ className, closeTimerForm }: TimerFormProps) {
           />
         </div>
       </div>
+    </Fragment>
+  );
+}
 
+function MinutesSlider({
+  minutes,
+  setMinutes,
+}: {
+  minutes: number;
+  setMinutes: (minutes: number) => void;
+}) {
+  return (
+    <Fragment>
       <div className="grid gap-2">
         <Label className="font-bold">Minutes</Label>
         <div className="flex gap-2">
@@ -123,44 +164,115 @@ export function TimerForm({ className, closeTimerForm }: TimerFormProps) {
           />
         </div>
       </div>
+    </Fragment>
+  );
+}
 
-      <div className="grid gap-2">
-        <Label className="font-bold">Seconds</Label>
-        <div className="flex gap-2">
-          <Slider
-            value={[seconds]}
-            onValueChange={(newValue) => setSeconds(newValue[0])}
-            max={59}
-            step={1}
-          />
-          <Input
-            type="number"
-            inputMode="numeric"
-            min={0}
-            max={59}
-            step={1}
-            value={seconds}
-            onChange={(e) => {
-              const value = e.target.value;
-              setSeconds(value === "" ? 0 : parseInt(value));
-            }}
-            className="w-16 rounded-full border-0 bg-transparent text-center shadow-none hover:ring-1 focus-visible:border-1 focus-visible:ring-0 dark:bg-transparent"
-          />
-        </div>
-      </div>
-
-      <div className="grid gap-2">
-        <Label className="font-bold">Notification Sound</Label>
-        <NotificationSoundSelector
-          soundKey={soundKey}
-          setSoundKey={setSoundKey}
+function SecondsSlider({
+  seconds,
+  setSeconds,
+}: {
+  seconds: number;
+  setSeconds: (seconds: number) => void;
+}) {
+  return (
+    <Fragment>
+      <Label className="font-bold">Seconds</Label>
+      <div className="flex gap-2">
+        <Slider
+          value={[seconds]}
+          onValueChange={(newValue) => setSeconds(newValue[0])}
+          max={59}
+          step={1}
+        />
+        <Input
+          type="number"
+          inputMode="numeric"
+          min={0}
+          max={59}
+          step={1}
+          value={seconds}
+          onChange={(e) => {
+            const value = e.target.value;
+            setSeconds(value === "" ? 0 : parseInt(value));
+          }}
+          className="w-16 rounded-full border-0 bg-transparent text-center shadow-none hover:ring-1 focus-visible:border-1 focus-visible:ring-0 dark:bg-transparent"
         />
       </div>
+    </Fragment>
+  );
+}
 
+function NotificationSoundSelector({
+  soundKey,
+  setSoundKey,
+}: {
+  soundKey: string;
+  setSoundKey: (soundKey: string) => void;
+}) {
+  const playSound = (soundKey: string) => {
+    const sound = soundFiles[soundKey]?.path;
+    if (sound) {
+      const audio = new Audio(sound);
+      audio.preload = "auto";
+      audio.play();
+    }
+  };
+
+  const handleSoundChange = (soundKey: string) => {
+    setSoundKey(soundKey);
+    if (soundKey !== "mute") {
+      playSound(soundKey);
+    }
+  };
+
+  return (
+    <div className="grid gap-2">
+      <Label className="font-bold">Notification Sound</Label>
+      <Select value={soundKey} onValueChange={handleSoundChange}>
+        <SelectTrigger className="w-full max-w-3xs">
+          <SelectValue placeholder="Select Sound" />
+        </SelectTrigger>
+        <SelectContent>
+          {Object.entries(soundFiles).map(([key, { name }]) => (
+            <SelectItem key={key} value={key}>
+              {name}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </div>
+  );
+}
+
+function ThemePicker({
+  color,
+  setColor,
+}: {
+  color: string;
+  setColor: (color: string) => void;
+}) {
+  return (
+    <Fragment>
+      <Label className="font-bold">Theme</Label>
+      <GradientPicker background={color} setBackground={setColor} />
+    </Fragment>
+  );
+}
+
+function SoundVolumeRadioGroup({
+  volume,
+  onValueChange,
+}: {
+  volume: number;
+  onValueChange: (volume: string) => void;
+}) {
+  return (
+    <Fragment>
       <Label className="font-bold">Sound Volume</Label>
       <RadioGroup
         value={volume.toString()}
-        onValueChange={handleVolumeChange}
+        onValueChange={onValueChange}
         className="grid-flow-col"
       >
         <div className="flex items-center space-x-2">
@@ -184,11 +296,6 @@ export function TimerForm({ className, closeTimerForm }: TimerFormProps) {
           <Label htmlFor="1">1</Label>
         </div>
       </RadioGroup>
-
-      <Label className="font-bold">Theme</Label>
-      <GradientPicker background={color} setBackground={setColor} />
-
-      <Button onClick={handleFormSubmit}>Save changes</Button>
-    </div>
+    </Fragment>
   );
 }

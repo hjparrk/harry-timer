@@ -1,4 +1,4 @@
-import Clock from "@/components/home/clock";
+import Clock from "@/components/clock/clock";
 
 export default function Page() {
   return <Clock />;

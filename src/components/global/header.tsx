@@ -9,7 +9,7 @@ import FullScreenToggle from "./fullscreen-toggle";
 export default function Header() {
   const pathname =
     usePathname().replace(/\/|-/g, (match) => (match === "/" ? "" : " ")) ||
-    "Time Now";
+    "Clock";
 
   return (
     <header className="flex h-16 shrink-0 items-center gap-2">

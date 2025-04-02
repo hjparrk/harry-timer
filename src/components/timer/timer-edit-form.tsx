@@ -46,8 +46,6 @@ export function TimerEditForm({ isActive }: { isActive: boolean }) {
               Make changes to your timer here. Click save when you&apos;re done.
             </DialogDescription>
           </DialogHeader>
-
-          {/* Timer Form */}
           <HydrationWrapper>
             <TimerForm closeTimerForm={closeTimerForm} />
           </HydrationWrapper>
@@ -71,13 +69,10 @@ export function TimerEditForm({ isActive }: { isActive: boolean }) {
               Make changes to your timer. Click save when you&apos;re done.
             </DrawerDescription>
           </DrawerHeader>
-
-          {/* Timer Form */}
           <HydrationWrapper>
             <TimerForm className="px-4" closeTimerForm={closeTimerForm} />
           </HydrationWrapper>
         </div>
-
         <DrawerFooter className="pt-2">
           <DrawerClose asChild>
             <Button variant="outline">Cancel</Button>
