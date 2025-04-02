@@ -3,7 +3,6 @@
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { useClock } from "@/hooks/use-clock";
-import { GradientPicker } from "../common/gradient-picker";
 
 export default function Clock() {
   const { time, date, is24Hour, setIs24Hour } = useClock();
